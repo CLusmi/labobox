@@ -1,0 +1,21 @@
+version: '2'
+services:
+  plex:
+    hostname: plex
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    restart: always
+    ports:
+      - 32400:32400/tcp
+    environment:
+      - PLEX_CLAIM=%CLAIM%
+      - PLEX_UID=1999
+      - PLEX_GID=1999
+      - TZ=Europe/Paris
+    volumes:
+      - /home/labobox/docker_apps/plex/database:/config
+      - /home/labobox/docker_apps/plex/transcode/temp:/transcode
+      - /home/labobox/docker_apps/rtorrentvpn/data/torrents:/data
+      
+#Vous pouvez rajouter des montages
+#Exemple : - /mnt/montage/films:/data_films

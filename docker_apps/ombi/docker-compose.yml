@@ -1,0 +1,14 @@
+version: '2'
+services:
+  ombi:
+    image: linuxserver/ombi:latest
+    container_name: ombi
+    restart: always
+    ports:
+      - 7003:3579
+    environment:
+      - PUID=1999
+      - PGID=1999
+      - TZ=Europe/Paris
+    volumes:
+      - /home/labobox/docker_apps/ombi:/config

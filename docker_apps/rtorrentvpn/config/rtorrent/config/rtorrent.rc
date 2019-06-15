@@ -1,0 +1,30 @@
+execute = {/bin/bash,-c,mkdir -p /data}
+directory.default.set = /data/torrents/01_temp_seedbox
+execute = {/bin/bash,-c,mkdir -p /config/rtorrent/session}
+session.path.set = /config/rtorrent/session/
+
+schedule2 = watch_directory_1,5,5,"load.start=~/watch/films/*.torrent,d.directory.set=~/torrents/01_temp_seedbox/films,d.custom1.set=FILMS_WATCH"
+schedule2 = watch_directory_2,5,5,"load.start=~/watch/series/*.torrent,d.directory.set=~/torrents/01_temp_seedbox/series,d.custom1.set=SERIES_WATCH"
+schedule2 = watch_directory_3,5,5,"load.start=~/watch/autres/*.torrent,d.directory.set=~/torrents/01_temp_seedbox/autres,d.custom1.set=AUTRES_WATCH"
+
+schedule2 = espace_disque_insuffisant,1,30,close_low_diskspace=2500M
+
+trackers.use_udp.set = yes
+protocol.pex.set = no
+dht.mode.set = off
+
+pieces.hash.on_completion.set = no
+
+network.port_random.set = no
+network.port_range.set = 49240-49240
+network.http.ssl_verify_peer.set = 0
+
+trackers.use_udp.set = yes
+protocol.pex.set = no
+dht.mode.set = off
+
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+
+scgi_port = 0.0.0.0:5000
+
+execute = {/bin/bash,-c,/usr/bin/sleep 10s && /usr/bin/php /usr/share/webapps/rutorrent/php/initplugins.php admin &}

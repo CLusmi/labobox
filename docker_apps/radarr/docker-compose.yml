@@ -1,0 +1,15 @@
+version: '2'
+services:
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    restart: always
+    ports:
+      - 7001:7878
+    environment:
+      - PUID=1999
+      - PGID=1999
+      - TZ=Europe/Paris
+    volumes:
+      - /home/labobox/docker_apps/radarr/config:/config
+      - /home/labobox/docker_apps/rtorrentvpn/data:/movies

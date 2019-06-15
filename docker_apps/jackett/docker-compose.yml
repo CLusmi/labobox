@@ -1,0 +1,15 @@
+version: '2'
+services:
+  jackett:
+    image: linuxserver/jackett:latest
+    container_name: jackett
+    restart: always
+    ports:
+      - 7000:9117
+    environment:
+      - PUID=1999
+      - PGID=1999
+      - TZ=Europe/Paris
+    volumes:
+      - /home/labobox/docker_apps/jackett/config:/config
+      - /etc/localtime:/etc/localtime:ro

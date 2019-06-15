@@ -1,0 +1,34 @@
+version: '3'
+services:
+  rtorrentvpn:      
+    image: binhex/arch-rtorrentvpn:latest
+    container_name: rtorrentvpn
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8000:9080
+      - 9443:9443
+      - 8118:8118
+      - 3000:3000
+    environment:
+      - VPN_ENABLED=no
+      - ENABLE_PRIVOXY=no
+      - ENABLE_FLOOD=no
+      - ENABLE_AUTODL_IRSSI=no
+      - ENABLE_RPC2=yes
+      - ENABLE_RPC2_AUTH=yes
+      - LAN_NETWORK=%network%/24
+      - NAME_SERVERS=209.222.18.222,37.235.1.174,1.1.1.1,8.8.8.8,209.222.18.218,37.235.1.177,1.0.0.1,8.8.4.4
+      - DEBUG=false
+      - PHP_TZ=Europe/Paris
+      - UMASK=000
+      - PUID=1999
+      - PGID=1999
+    volumes:
+      - /home/labobox/docker_apps/rtorrentvpn/data:/data
+      - /home/labobox/docker_apps/rtorrentvpn/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      
+
+# LAN_NETWORK=192.168.0.0/24  soit : 3 premiers blocs de l'ip et dernier bloc du netmask /// cat /etc/network/interfaces /// (exemple : address 192.168.0.4 / netmask 255.255.255.0 / donc LAN_NETWORK=192.168.0.0/24)

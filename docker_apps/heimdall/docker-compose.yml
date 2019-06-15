@@ -1,0 +1,15 @@
+version: '2'
+services:
+  heimdall:
+    image: linuxserver/heimdall:latest
+    container_name: heimdall
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - PUID=1999
+      - PGID=1999
+      - TZ=Europe/London
+    volumes:
+      - /home/labobox/docker_apps/heimdall/config:/config
